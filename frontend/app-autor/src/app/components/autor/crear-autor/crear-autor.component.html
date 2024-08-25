@@ -1,0 +1,42 @@
+<div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-md mx-auto" data-v0-t="card">
+  <div class="flex flex-col space-y-1.5 p-6 text-center">
+    <h3 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">Añadir Autor</h3>
+    <p class="text-sm text-muted-foreground">Ingrese los datos del autor</p>
+  </div>
+  <div class="p-6 text-center">
+    <form class="space-y-4" (ngSubmit)="onSubmit()" #autorForm="ngForm">
+      <div class="space-y-2">
+        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for="firstName">
+          Nombre
+        </label>
+        <input
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id="nombre" required="true" value="nombre" name="nombre" [(ngModel)]="autor.nombre"/>
+      </div>
+      <div class="space-y-2">
+        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for="lastName">
+          Apellido
+        </label>
+        <input
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id="apellido" required="true" name="apellido"  [(ngModel)]="autor.apellido"/>
+      </div>
+      <div class="space-y-2">
+        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for="dni">
+          DNI
+        </label>
+        <input
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id="dni" required="true" name="dni" type="number" [(ngModel)]="autor.dni"/>
+      </div>
+      <button
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        type="submit">
+        Guardar Autor
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+scaffolding\cc\services\impl\AutorServiceImpl.class
+scaffolding\cc\configs\SpringDocConfig.class
+scaffolding\cc\entities\AutorEntity.class
+scaffolding\cc\models\Libro.class
+scaffolding\cc\services\AutorService.class
+scaffolding\cc\controllers\AutorController.class
+scaffolding\cc\configs\MappersConfig.class
+scaffolding\cc\repositories\jpa\AutorRepository.class
+scaffolding\cc\repositories\jpa\LibroRepository.class
+scaffolding\cc\Application.class
+scaffolding\cc\configs\RestClientConfig.class
+scaffolding\cc\models\Autor.class
+scaffolding\cc\entities\LibroEntity.class
