@@ -23,8 +23,8 @@ export class BuscarAutorComponent implements OnInit {
     dni: 0,
   };
 
-  id: number = 0;
-  dni: number = 0;
+  id!: number;
+  dni!: number;
   editingAutor: Autor | null = null;
 
   constructor(private autorService: AutorService) {}

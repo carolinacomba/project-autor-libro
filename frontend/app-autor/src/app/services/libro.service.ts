@@ -20,4 +20,8 @@ export class LibroService {
     return this.http.put<Libro>(this.api+'/updateLibro/'+id, libro);
   }
 
+  deleteLibro(id: number){
+    return this.http.delete<Libro>(this.api+'/deleteLibro/'+id);
+  }
+
 }

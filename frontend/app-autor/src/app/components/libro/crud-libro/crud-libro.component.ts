@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Autor } from '../../../models/Autor';
 import { Libro } from '../../../models/Libro';
 import { EditarLibroComponent } from '../editar-libro/editar-libro.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crud-libro',
@@ -54,4 +55,37 @@ export class CrudLibroComponent implements OnInit {
   }
 
   id?: number;
+
+  deleteLibro(id: number){
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esta acción",
+      icon: 'warning',
+      showCloseButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.libroService.deleteLibro(id).subscribe(
+          () => {
+            Swal.fire(
+              '¡Exitoso!',
+              'El autor ha sido eliminado correctamente',
+              'success'
+            );
+            this.loadLibros();
+          },
+          (error) => {
+            Swal.fire(
+              '¡Error!',
+              'Hubo un error al intentar borrar el autor',
+              'error'
+            );
+            console.error('Error al eliminar autor', error);
+          }
+        );
+      }
+    });
+  }
 }
