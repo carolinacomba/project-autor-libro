@@ -43,10 +43,8 @@ export class CrearAutorComponent {
       (error) => {
         console.error('Error completo:', error);
         if (error.error instanceof ErrorEvent) {
-          // Error del lado del cliente
           console.error('Error del cliente:', error.error.message);
         } else {
-          // El backend devolvió un código de respuesta unsuccessful
           console.error(`Backend devolvió código ${error.status}, ` +
             `cuerpo era: ${error.error}`);
         }

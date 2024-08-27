@@ -1,61 +1,36 @@
-<!-- listar-autores.component.html -->
-<div class="container mx-auto px-4 sm:px-8">
-  <div class="py-8">
-    <div>
-      <h2 class="text-2xl font-semibold leading-tight text-center">Autores</h2>
-    </div>
-    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-      <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-        <table class="min-w-full leading-normal">
-          <thead>
-            <tr>
-              <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Nombre
-              </th>
-              <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Apellido
-              </th>
-              <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                DNI
-              </th>
-              <th
-                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Acciones
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            @for(autor of autores; track autor.dni){
-            <tr>
-              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <p class="text-gray-900 whitespace-no-wrap">{{autor.nombre}}</p>
-              </td>
-              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <p class="text-gray-900 whitespace-no-wrap">{{autor.apellido}}</p>
-              </td>
-              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <p class="text-gray-900 whitespace-no-wrap">{{autor.dni}}</p>
-              </td>
-              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <button (click)="editAutor(autor)" class="text-blue-600 hover:text-blue-900 mr-2">
-                  <i class="bi bi-pencil"></i>
-                </button>
-                <button (click)="deleteAutor(autor)" class="text-red-600 hover:text-red-900">
-                  <i class="bi bi-trash"></i>
-                </button>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<div class="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+	<h1 class="text-3xl md:text-4xl font-bold mb-6">Autores</h1>
+	<div class="w-full max-w-5xl bg-white rounded-lg shadow-lg overflow-x-auto">
+		<table class="w-full">
+			<thead class="bg-blue-500 text-white">
+				<tr>
+					<th class="px-4 py-2 text-left font-medium">Nombre</th>
+					<th class="px-4 py-2 text-left font-medium">Apellido</th>
+					<th class="px-4 py-2 text-left font-medium">DNI</th>
+					<th class="px-4 py-2 text-left font-medium">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for(autor of autores; track autor.dni){
+				<tr class="hover:bg-gray-100">
+					<td class="px-4 py-3">{{ autor.nombre }}</td>
+					<td class="px-4 py-3">{{ autor.apellido }}</td>
+					<td class="px-4 py-3">{{ autor.dni }}</td>
+					<td class="px-4 py-3 flex space-x-2">
+						<button (click)="editAutor(autor)" class="text-blue-500 hover:text-blue-700">
+							<i class="bi bi-pencil"></i>
+						</button>
+						<button (click)="deleteAutor(autor)" class="text-red-500 hover:text-red-700">
+							<i class="bi bi-trash"></i>
+						</button>
+					</td>
+				</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <app-editar-autor *ngIf="editingAutor" [autor]="editingAutor" (autorUpdated)="onAutorUpdated($event)"
-  (cancelEdit)="cancelEdit()">
+	(cancelEdit)="cancelEdit()">
 </app-editar-autor>

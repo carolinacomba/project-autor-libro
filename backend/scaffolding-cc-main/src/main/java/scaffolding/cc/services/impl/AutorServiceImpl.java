@@ -58,10 +58,6 @@ public class AutorServiceImpl implements AutorService {
         autorEntity.setApellido(autor.getApellido());
         autorEntity.setDni(autor.getDni());
         AutorEntity autorSaved = autorRepository.save(autorEntity);
-//        Autor autorSavedModel = new Autor();
-//        autorSavedModel.setNombre(autorSaved.getNombre());
-//        autorSavedModel.setApellido(autorSaved.getApellido());
-//        autorSavedModel.setDni(autorSaved.getDni());
         return autorSaved;
     }
 

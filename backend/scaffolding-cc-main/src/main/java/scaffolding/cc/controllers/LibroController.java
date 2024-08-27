@@ -55,9 +55,9 @@ public class LibroController {
     public ResponseEntity<LibroEntity> updateLibro(@RequestBody LibroDTO libro, @PathVariable Long id) {
         LibroEntity updatedLibro = libroService.updateLibro(id, libro);
         if (updatedLibro != null) {
-            return new ResponseEntity<>(updatedLibro, HttpStatus.OK);
+            return ResponseEntity.ok(updatedLibro);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 }

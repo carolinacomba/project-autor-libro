@@ -6,17 +6,17 @@
 				<form (ngSubmit)="onSubmit()" #autorForm="ngForm">
 					<div class="mb-4">
 						<label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
-						<input type="text" id="nombre" name="nombre" [(ngModel)]="autor.nombre" required
+						<input type="text" id="nombre" name="nombre" [(ngModel)]="libro.nombre" required
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 					</div>
 					<div class="mb-4">
-						<label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido</label>
-						<input type="text" id="apellido" name="apellido" [(ngModel)]="autor.apellido" required
+						<label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Editorial</label>
+						<input type="text" id="apellido" name="apellido" [(ngModel)]="libro.editorial" required
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 					</div>
 					<div class="mb-4">
-						<label for="dni" class="block text-gray-700 text-sm font-bold mb-2">DNI</label>
-						<input type="number" id="dni" name="dni" [(ngModel)]="autor.dni" required
+						<label for="dni" class="block text-gray-700 text-sm font-bold mb-2">Género</label>
+						<input type="text" id="dni" name="dni" [(ngModel)]="libro.genero" required
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 					</div>
 					<div class="flex items-center justify-between">

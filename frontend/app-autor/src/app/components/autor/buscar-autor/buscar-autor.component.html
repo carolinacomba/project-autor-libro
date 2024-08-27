@@ -3,19 +3,22 @@
       <div>
          <h2 class="text-2xl font-semibold leading-tight text-center">Autores</h2>
       </div>
-
       <div class="grid grid-cols-2 gap-2 text-center">
-         <div class="bg-blue-500 p-2">
+         <div class="bg-white p-2">
             <span>Buscar por ID</span>
-            <input type="number" placeholder="ID" class="w-full p-2 m-2 border border-gray-300 rounded" [(ngModel)]="id">
-            <button (click)="buscarById()" class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <input type="number" placeholder="ID" class="w-full p-2 m-2 border border-gray-300 rounded"
+               [(ngModel)]="id">
+            <button (click)="buscarById()"
+               class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                <i class="bi bi-search"></i>
             </button>
          </div>
          <div class="bg-green-500 p-2">
             <span>Buscar por DNI</span>
-            <input type="number" placeholder="DNI" class="w-full p-2 m-2 border border-gray-300 rounded" [(ngModel)]="dni">
-            <button (click)="buscarByDni()" class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <input type="number" placeholder="DNI" class="w-full p-2 m-2 border border-gray-300 rounded"
+               [(ngModel)]="dni">
+            <button (click)="buscarByDni()"
+               class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                <i class="bi bi-search"></i>
             </button>
          </div>

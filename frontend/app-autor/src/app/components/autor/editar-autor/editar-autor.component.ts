@@ -25,18 +25,6 @@ export class EditarAutorComponent implements OnInit {
 
   constructor(private autorService: AutorService) {}
 
-
-  onSubmit2() {
-    this.autorService.updateAutor(this.originalDni, this.autor).subscribe(
-      (updatedAutor) => {
-        this.autorUpdated.emit(updatedAutor);
-      },
-      (error) => {
-        alert(`Error al actualizar el autor: ${error.message}`);
-      }
-    );
-  }
-
   onSubmit() {
     Swal.fire({
       title: "¿Quieres guardar los cambios?",

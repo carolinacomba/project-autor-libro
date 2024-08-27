@@ -1,3 +1,51 @@
-<p>
-  crud-libro works!
-</p>
+<div class="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+   <h1 class="text-3xl md:text-4xl font-bold mb-6">Libros</h1>
+   <div class="w-full max-w-5xl flex justify-between items-center mb-4">
+      <div class="flex space-x-2">
+         <input id="search" type="text" [(ngModel)]="id" placeholder="Buscar libro por ID"
+            class="p-2 border rounded w-64" />
+         <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+            <i class="bi bi-search mr-2"></i>Buscar
+         </button>
+      </div>
+      <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 flex items-center">
+         <i class="bi bi-book mr-2"></i> Añadir libro
+      </button>
+   </div>
+
+   <div class="w-full max-w-5xl bg-white rounded-lg shadow-lg overflow-x-auto">
+      <table class="w-full">
+         <thead class="bg-blue-500 text-white">
+            <tr>
+               <th class="px-4 py-2 text-left font-medium">Nombre</th>
+               <th class="px-4 py-2 text-left font-medium">Editorial</th>
+               <th class="px-4 py-2 text-left font-medium">Género</th>
+               <th class="px-4 py-2 text-left font-medium">Autor</th>
+               <th class="px-4 py-2 text-left font-medium">Acciones</th>
+            </tr>
+         </thead>
+         <tbody>
+            @for(libro of libros; track libro.nombre){
+            <tr class="hover:bg-gray-100">
+               <td class="px-4 py-3">{{ libro.nombre }}</td>
+               <td class="px-4 py-3">{{ libro.editorial }}</td>
+               <td class="px-4 py-3">{{ libro.genero }}</td>
+               <td class="px-4 py-3">{{ libro.autor?.nombre }} {{ libro.autor?.apellido }}</td>
+               <td class="px-4 py-3 flex space-x-2">
+                  <button (click)="editLibro(libro)" class="text-blue-500 hover:text-blue-700">
+                     <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="text-red-500 hover:text-red-700">
+                     <i class="bi bi-trash"></i>
+                  </button>
+               </td>
+            </tr>
+            }
+         </tbody>
+      </table>
+   </div>
+</div>
+
+<app-editar-libro *ngIf="editingLibro" [libro]="editingLibro" (libroUpdated)="onLibroUpdated($event)"
+   (cancelEdit)="cancelEdit()">
+</app-editar-libro>

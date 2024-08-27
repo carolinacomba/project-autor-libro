@@ -9,7 +9,6 @@ import scaffolding.cc.models.Autor;
 import scaffolding.cc.models.Libro;
 import scaffolding.cc.repositories.jpa.AutorRepository;
 import scaffolding.cc.repositories.jpa.LibroRepository;
-import scaffolding.cc.services.AutorService;
 import scaffolding.cc.services.LibroService;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class LibroServiceImpl implements LibroService {
     public List<Libro> getLibros() {
         List<Libro> libros = new ArrayList<>();
         for (LibroEntity l : libroRepository.findAll()) {
-            libros.add(new Libro(l.getNombre(), l.getEditorial(), l.getGenero(), new Autor(l.getAutor().getNombre(), l.getAutor().getApellido(), l.getAutor().getDni())));
+            libros.add(new Libro(l.getId(), l.getNombre(), l.getEditorial(), l.getGenero(), new Autor(l.getAutor().getNombre(), l.getAutor().getApellido(), l.getAutor().getDni())));
         }
         return libros;
     }
@@ -38,6 +37,7 @@ public class LibroServiceImpl implements LibroService {
     public Libro getLibroById(Long id) {
         LibroEntity libroEntity = libroRepository.findById(id).get();
         Libro libro = new Libro();
+        libro.setId(libroEntity.getId());
         libro.setNombre(libroEntity.getNombre());
         libro.setEditorial(libroEntity.getEditorial());
         libro.setGenero(libroEntity.getGenero());
@@ -73,13 +73,9 @@ public class LibroServiceImpl implements LibroService {
     @Override
     public LibroEntity updateLibro(Long id, LibroDTO libro) {
         LibroEntity libroEntity = libroRepository.findById(id).get();
-        if(libroEntity != null){
-            libroEntity.setNombre(libro.getNombre());
-            libroEntity.setEditorial(libro.getEditorial());
-            libroEntity.setGenero(libro.getGenero());
-            return libroRepository.save(libroEntity);
-        } else {
-            throw new IllegalArgumentException("Libro no encontrado");
-        }
+        libroEntity.setNombre(libro.getNombre());
+        libroEntity.setEditorial(libro.getEditorial());
+        libroEntity.setGenero(libro.getGenero());
+        return libroRepository.save(libroEntity);
     }
 }

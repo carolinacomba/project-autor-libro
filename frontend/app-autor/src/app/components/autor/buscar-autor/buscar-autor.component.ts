@@ -16,7 +16,6 @@ import { EditarAutorComponent } from '../editar-autor/editar-autor.component';
   providers: [AutorService],
 })
 export class BuscarAutorComponent implements OnInit {
-  //autores: Autor[] = [];
 
   autor: Autor = {
     nombre: '',
