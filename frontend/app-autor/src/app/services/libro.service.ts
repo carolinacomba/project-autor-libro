@@ -24,4 +24,8 @@ export class LibroService {
     return this.http.delete<Libro>(this.api+'/deleteLibro/'+id);
   }
 
+  addLibro(libro: Libro, dni: number){
+    return this.http.post<Libro>(this.api+'/saveLibro/'+dni, libro);
+  }
+
 }

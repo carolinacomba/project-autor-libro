@@ -8,7 +8,7 @@
             <i class="bi bi-search mr-2"></i>Buscar
          </button>
       </div>
-      <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 flex items-center">
+      <button (click)="addLibro()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 flex items-center">
          <i class="bi bi-book mr-2"></i> Añadir libro
       </button>
    </div>
@@ -25,7 +25,7 @@
             </tr>
          </thead>
          <tbody>
-            @for(libro of libros; track libro.nombre){
+            @for(libro of libros; track libro){
             <tr class="hover:bg-gray-100">
                <td class="px-4 py-3">{{ libro.nombre }}</td>
                <td class="px-4 py-3">{{ libro.editorial }}</td>
@@ -48,4 +48,8 @@
 
 @if(editingLibro){
    <app-editar-libro [libro]="editingLibro" (cancelEdit)="cancelEdit()" (libroUpdated)="onLibroUpdated($event)"></app-editar-libro>
+}
+
+@if(addLibroComponent){
+   <app-add-libro (libroAdded)="onLibroAdded()" (cancelarAdd)="onCancelAddLibro()"></app-add-libro>
 }
