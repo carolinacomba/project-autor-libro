@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Autor } from '../models/Autor';
 
 @Injectable({
@@ -35,5 +35,13 @@ export class AutorService {
 
   getAutorById(id: number): Observable<Autor> {
     return this.http.get<Autor>(this.api+'/getAutorById/'+id);
+  }
+
+  validarDni(dni: number): Observable<boolean> {
+    return this.getAutores().pipe(
+      map((autores: Autor[]) => {
+        return !autores.some(autor => autor.dni === dni);
+      })
+    );
   }
 }

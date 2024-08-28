@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center min-h-screen bg-gray-100 p-4">
-	<h1 class="text-3xl md:text-4xl font-bold mb-6">Autores</h1>
+	<h1 class="text-3xl md:text-4xl font-bold mb-6">Buscar Autor</h1>
    <div class="grid grid-cols-2 gap-2 text-center mb-8">
       <div class="bg-white p-2 rounded-md">
          <span>Buscar por ID</span>
@@ -49,7 +49,6 @@
 	</div>
 </div>
 
-
-<app-editar-autor *ngIf="editingAutor" [autor]="editingAutor" (autorUpdated)="onAutorUpdated($event)"
-   (cancelEdit)="cancelEdit()">
-</app-editar-autor>
+@if(editingAutor) {
+   <app-editar-autor [autor]="editingAutor" (cancelEdit)="cancelEdit()" (autorUpdated)="onAutorUpdated($event)"></app-editar-autor>
+}

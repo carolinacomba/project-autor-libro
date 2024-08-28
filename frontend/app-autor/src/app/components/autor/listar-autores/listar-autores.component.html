@@ -11,7 +11,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@for(autor of autores; track autor.dni){
+				@for(autor of autores; track autor){
 				<tr class="hover:bg-gray-100">
 					<td class="px-4 py-3">{{ autor.nombre }}</td>
 					<td class="px-4 py-3">{{ autor.apellido }}</td>
@@ -31,6 +31,6 @@
 	</div>
 </div>
 
-<app-editar-autor *ngIf="editingAutor" [autor]="editingAutor" (autorUpdated)="onAutorUpdated($event)"
-	(cancelEdit)="cancelEdit()">
-</app-editar-autor>
+@if (editingAutor){
+	<app-editar-autor [autor]="editingAutor" (autorUpdated)="onAutorUpdated($event)" (cancelEdit)="cancelEdit()"></app-editar-autor>
+}

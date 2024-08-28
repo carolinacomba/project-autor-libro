@@ -4,6 +4,8 @@ import { Autor } from '../../../models/Autor';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { EditarAutorComponent } from '../editar-autor/editar-autor.component';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
 import Swal from 'sweetalert2';
 
 @Component({

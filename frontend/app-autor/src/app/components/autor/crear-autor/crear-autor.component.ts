@@ -25,31 +25,31 @@ export class CrearAutorComponent {
   constructor(private autorService: AutorService) {}
 
   onSubmit() {
-    this.autorService.saveAutor(this.autor).subscribe(
-      (response) => {
-        console.log('Autor guardado:', response);
+    this.autorService.validarDni(this.autor.dni).subscribe(valido => {
+      if (valido) {
+        this.autorService.saveAutor(this.autor).subscribe(
+          (response) => {
+            Swal.fire({
+              icon: "success",
+              title: "Autor creado correctamente",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.autor = {
+              nombre: '',
+              apellido: '',
+              dni: 0,
+            };
+          }
+        )
+      } else {
         Swal.fire({
-          icon: "success",
-          title: "Autor creado correctamente",
-          showConfirmButton: false,
-          timer: 1500
+          icon: "error",
+          title: "Oops...",
+          text: "Ya existe un autor con ese DNI",
+          confirmButtonColor: "#3085d6",
         });
-        this.autor = {
-          nombre: '',
-          apellido: '',
-          dni: 0,
-        };
-      },
-      (error) => {
-        console.error('Error completo:', error);
-        if (error.error instanceof ErrorEvent) {
-          console.error('Error del cliente:', error.error.message);
-        } else {
-          console.error(`Backend devolvió código ${error.status}, ` +
-            `cuerpo era: ${error.error}`);
-        }
-        alert(`Error al guardar el autor: ${error.message}`);
       }
-    );
+    })
   }
 }

@@ -29,7 +29,9 @@ export class BuscarAutorComponent implements OnInit {
 
   constructor(private autorService: AutorService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.autor.dni = this.dni;
+  }
 
   buscarById() {
     this.autorService.getAutorById(this.id).subscribe(
@@ -37,7 +39,13 @@ export class BuscarAutorComponent implements OnInit {
         this.autor = data;
       },
       (error) => {
-        alert(`Error al buscar al autor: ${error.message}`); }
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No existe ningún autor con ese ID",
+          confirmButtonColor: "#3085d6",
+        });
+      }
     );
   }
 
@@ -49,7 +57,7 @@ export class BuscarAutorComponent implements OnInit {
       (error) => {
         Swal.fire({
           title: "Error",
-          text: "No se encontro el autor",
+          text: "No existe ningún autor con ese DNI",
           icon: "error",
           showCloseButton: true,
           confirmButtonColor: "#3085d6",
@@ -75,7 +83,6 @@ export class BuscarAutorComponent implements OnInit {
         this.autor = data;
       },
       (error) => {
-        console.error('Error al cargar el autor', error);
         Swal.fire('Error', 'No se pudo cargar el autor actualizado', 'error');
       }
     );
@@ -92,7 +99,6 @@ export class BuscarAutorComponent implements OnInit {
         Swal.fire('¡Éxito!', 'Autor actualizado correctamente', 'success');
       },
       (error) => {
-        console.error('Error al actualizar el autor', error);
         Swal.fire('Error', 'No se pudo actualizar el autor', 'error');
       }
     );
@@ -121,8 +127,7 @@ export class BuscarAutorComponent implements OnInit {
               nombre: '',
               apellido: '',
               dni: 0,
-            };
-            location.reload();
+            };            
           },
           (error) => {
             Swal.fire(
@@ -130,7 +135,6 @@ export class BuscarAutorComponent implements OnInit {
               'Hubo un error al intentar borrar el autor',
               'error'
             );
-            console.error('Error al eliminar autor', error);
           }
         );
       }

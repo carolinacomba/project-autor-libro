@@ -46,6 +46,6 @@
    </div>
 </div>
 
-<app-editar-libro *ngIf="editingLibro" [libro]="editingLibro" (libroUpdated)="onLibroUpdated($event)"
-   (cancelEdit)="cancelEdit()">
-</app-editar-libro>
+@if(editingLibro){
+   <app-editar-libro [libro]="editingLibro" (cancelEdit)="cancelEdit()" (libroUpdated)="onLibroUpdated($event)"></app-editar-libro>
+}

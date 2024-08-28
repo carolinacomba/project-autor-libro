@@ -33,12 +33,16 @@ public class AutorServiceImpl implements AutorService {
 
     @Override
     public Autor getAutorById(Long id) {
-        AutorEntity autorEntity = autorRepository.findById(id).get();
-        Autor autor = new Autor();
-        autor.setNombre(autorEntity.getNombre());
-        autor.setApellido(autorEntity.getApellido());
-        autor.setDni(autorEntity.getDni());
-        return autor;
+        if (!autorRepository.existsById(id)) {
+            throw new IllegalArgumentException("Autor no encontrado");
+        } else {
+            AutorEntity autorEntity = autorRepository.findById(id).get();
+            Autor autor = new Autor();
+            autor.setNombre(autorEntity.getNombre());
+            autor.setApellido(autorEntity.getApellido());
+            autor.setDni(autorEntity.getDni());
+            return autor;
+        }
     }
 
     @Override
@@ -53,12 +57,16 @@ public class AutorServiceImpl implements AutorService {
 
     @Override
     public AutorEntity saveAutor(Autor autor) {
-        AutorEntity autorEntity = new AutorEntity();
-        autorEntity.setNombre(autor.getNombre());
-        autorEntity.setApellido(autor.getApellido());
-        autorEntity.setDni(autor.getDni());
-        AutorEntity autorSaved = autorRepository.save(autorEntity);
-        return autorSaved;
+        if (autorRepository.findByDni(autor.getDni()) != null) {
+            throw new IllegalArgumentException("Ya existe un autor con ese DNI");
+        } else {
+            AutorEntity autorEntity = new AutorEntity();
+            autorEntity.setNombre(autor.getNombre());
+            autorEntity.setApellido(autor.getApellido());
+            autorEntity.setDni(autor.getDni());
+            AutorEntity autorSaved = autorRepository.save(autorEntity);
+            return autorSaved;
+        }
     }
 
     @Override
