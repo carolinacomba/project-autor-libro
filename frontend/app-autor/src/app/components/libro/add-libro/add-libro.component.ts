@@ -60,7 +60,6 @@ export class AddLibroComponent implements OnInit {
               this.cancelarAdd.emit();
             },
             (error) => {
-              console.error('Error al crear el libro:', error);
               Swal.fire({
                 icon: 'error',
                 title: 'Error al crear el libro',

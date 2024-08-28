@@ -7,6 +7,7 @@ import { Libro } from '../../../models/Libro';
 import { EditarLibroComponent } from '../editar-libro/editar-libro.component';
 import Swal from 'sweetalert2';
 import { AddLibroComponent } from '../add-libro/add-libro.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-crud-libro',
@@ -23,20 +24,25 @@ import { AddLibroComponent } from '../add-libro/add-libro.component';
   providers: [LibroService],
 })
 export class CrudLibroComponent implements OnInit {
-  libros: Libro[] = [];
-
-  constructor(private libroService: LibroService) {}
-
-  loadLibros() {
-    this.libroService.getLibros().subscribe((libros) => {
-      this.libros = libros;
-    });
-  }
-
+  
+  libros$: Observable<Libro[]>;
+  librosFiltrados: Libro[] = [];
+  busqueda = '';
   editingLibro: Libro | null = null;
+  addLibroComponent = false;
+
+  constructor(private libroService: LibroService) {
+    this.libros$ = this.libroService.getLibros();
+  }
 
   ngOnInit() {
     this.loadLibros();
+  }
+
+  loadLibros() {
+    this.libros$.subscribe(libros => {
+      this.librosFiltrados = libros;
+    });
   }
 
   editLibro(libro: Libro) {
@@ -44,23 +50,14 @@ export class CrudLibroComponent implements OnInit {
   }
 
   onLibroUpdated(updatedLibro: Libro) {
-    if (this.editingLibro) {
-      const index = this.libros.findIndex(
-        (l) => l.id === this.editingLibro!.id
-      );
-      if (index !== -1) {
-        this.libros[index] = updatedLibro;
-      }
-    }
     this.editingLibro = null;
     this.loadLibros();
+    this.busqueda = '';
   }
 
   cancelEdit() {
     this.editingLibro = null;
   }
-
-  id?: number;
 
   deleteLibro(id: number) {
     Swal.fire({
@@ -75,27 +72,17 @@ export class CrudLibroComponent implements OnInit {
       if (result.isConfirmed) {
         this.libroService.deleteLibro(id).subscribe(
           () => {
-            Swal.fire(
-              '¡Exitoso!',
-              'El libro ha sido eliminado correctamente',
-              'success'
-            );
+            Swal.fire('¡Exitoso!', 'El libro ha sido eliminado correctamente', 'success');
             this.loadLibros();
           },
           (error) => {
-            Swal.fire(
-              '¡Error!',
-              'Hubo un error al intentar borrar el libro',
-              'error'
-            );
+            Swal.fire('¡Error!', 'Hubo un error al intentar borrar el libro', 'error');
             console.error('Error al eliminar libro', error);
           }
         );
       }
     });
   }
-
-  addLibroComponent: boolean = false;
 
   addLibro() {
     this.addLibroComponent = true;
@@ -104,8 +91,21 @@ export class CrudLibroComponent implements OnInit {
   onCancelAddLibro() {
     this.addLibroComponent = false;
   }
+
   onLibroAdded() {
     this.addLibroComponent = false;
     this.loadLibros();
+  }
+
+  buscarLibro(query: string): void {
+    this.libros$.subscribe(libros => {
+      this.librosFiltrados = libros.filter(libro =>
+        libro.nombre.toLowerCase().includes(query.toLowerCase()) ||
+        libro.editorial.toLowerCase().includes(query.toLowerCase()) ||
+        libro.genero.toLowerCase().includes(query.toLowerCase()) ||
+        libro.autor?.nombre.toLowerCase().includes(query.toLowerCase()) ||
+        libro.autor?.apellido.toLowerCase().includes(query.toLowerCase())
+      );
+    });
   }
 }
