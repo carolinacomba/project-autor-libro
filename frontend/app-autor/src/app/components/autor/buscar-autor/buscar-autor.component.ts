@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Autor } from '../../../models/Autor';
 import { AutorService } from '../../../services/autor.service';
 import Swal from 'sweetalert2';
@@ -27,7 +27,9 @@ export class BuscarAutorComponent implements OnInit {
   dni!: number;
   editingAutor: Autor | null = null;
 
-  constructor(private autorService: AutorService) {}
+  private autorService = inject(AutorService);
+
+  //constructor(private autorService: AutorService) {}
 
   ngOnInit() {
     this.autor.dni = this.dni;

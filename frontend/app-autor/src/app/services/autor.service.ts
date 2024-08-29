@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Autor } from '../models/Autor';
 
@@ -9,9 +9,9 @@ import { Autor } from '../models/Autor';
 export class AutorService {
   private api = 'http://localhost:8080/api/autor';
 
-  constructor(private http: HttpClient) {
-    
-  }
+  private http = inject(HttpClient);
+
+  //constructor(private http: HttpClient) {}
 
   saveAutor(autor: Autor): Observable<any> {
     return this.http.post<Autor>(this.api+'/saveAutor/', autor);

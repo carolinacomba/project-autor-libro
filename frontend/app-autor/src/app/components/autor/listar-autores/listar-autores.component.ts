@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AutorService } from '../../../services/autor.service';
 import { Autor } from '../../../models/Autor';
 import { CommonModule } from '@angular/common';
@@ -20,7 +20,9 @@ export class ListarAutoresComponent implements OnInit {
 
   autores: Autor[] = [];
 
-  constructor(private autorService: AutorService) {}
+  private autorService = inject(AutorService);
+
+  //constructor(private autorService: AutorService) {}
 
   ngOnInit() {
     this.loadAutores();

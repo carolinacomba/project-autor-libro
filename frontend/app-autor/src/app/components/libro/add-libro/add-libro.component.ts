@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LibroService } from '../../../services/libro.service';
 import { Libro } from '../../../models/Libro';
@@ -27,10 +27,10 @@ export class AddLibroComponent implements OnInit {
     genero: '',
   };
 
-  constructor(
-    private libroService: LibroService,
-    private autorService: AutorService
-  ) {}
+  private autorService = inject(AutorService);
+  private libroService = inject(LibroService);
+
+  //constructor(private libroService: LibroService, private autorService: AutorService) {}
 
   ngOnInit() {}
 

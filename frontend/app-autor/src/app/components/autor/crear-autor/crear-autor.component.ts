@@ -1,6 +1,6 @@
 import { AutorService } from './../../../services/autor.service';
 import { Autor } from './../../../models/Autor';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -22,7 +22,9 @@ export class CrearAutorComponent {
     dni: 0,
   };
 
-  constructor(private autorService: AutorService) {}
+  private autorService = inject(AutorService);
+
+  //constructor(private autorService: AutorService) {}
 
   onSubmit() {
     this.autorService.validarDni(this.autor.dni).subscribe(valido => {

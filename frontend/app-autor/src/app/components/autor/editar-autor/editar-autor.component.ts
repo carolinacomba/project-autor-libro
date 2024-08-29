@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Autor } from '../../../models/Autor';
 import { AutorService } from '../../../services/autor.service';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +23,9 @@ export class EditarAutorComponent implements OnInit {
     this.originalDni = this.autor.dni;
   }
 
-  constructor(private autorService: AutorService) {}
+  private autorService = inject(AutorService);
+
+  //constructor(private autorService: AutorService) {}
 
   onSubmit() {
     Swal.fire({

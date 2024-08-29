@@ -1,5 +1,5 @@
 import { LibroService } from './../../../services/libro.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Libro } from '../../../models/Libro';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -28,7 +28,9 @@ export class EditarLibroComponent implements OnInit {
 
   editingLibro: Libro | null = null;
 
-  constructor(private libroService: LibroService) {}
+  //constructor(private libroService: LibroService) {}
+  
+  private libroService = inject(LibroService);
 
   ngOnInit() {}
 

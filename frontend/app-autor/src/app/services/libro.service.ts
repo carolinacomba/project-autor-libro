@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Libro } from '../models/Libro';
 import { Observable } from 'rxjs';
 import { LibroDTO } from '../models/LibroDTO';
@@ -10,7 +10,9 @@ import { LibroDTO } from '../models/LibroDTO';
 export class LibroService {
   private api = 'http://localhost:8080/api/libro';
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
+  //constructor(private http: HttpClient) {}
 
   getLibros(): Observable<Libro[]> {
     return this.http.get<Libro[]>(this.api+'/getLibros');

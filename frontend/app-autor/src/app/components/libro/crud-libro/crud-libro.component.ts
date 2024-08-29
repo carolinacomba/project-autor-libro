@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LibroService } from './../../../services/libro.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Libro } from '../../../models/Libro';
 import { EditarLibroComponent } from '../editar-libro/editar-libro.component';
@@ -31,9 +31,11 @@ export class CrudLibroComponent implements OnInit {
   editingLibro: Libro | null = null;
   addLibroComponent = false;
 
-  constructor(private libroService: LibroService) {
+  constructor() {
     this.libros$ = this.libroService.getLibros();
   }
+
+  private libroService = inject(LibroService);
 
   ngOnInit() {
     this.loadLibros();
