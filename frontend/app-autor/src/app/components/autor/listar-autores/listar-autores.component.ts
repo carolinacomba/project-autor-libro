@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { LibroService } from '../../../services/libro.service';
 import { Libro } from '../../../models/Libro';
 import { EditarLibroComponent } from '../../libro/editar-libro/editar-libro.component';
+import { AddLibroComponent } from '../../libro/add-libro/add-libro.component';
 
 @Component({
   selector: 'app-listar-autores',
@@ -19,12 +20,12 @@ import { EditarLibroComponent } from '../../libro/editar-libro/editar-libro.comp
     HttpClientModule,
     EditarAutorComponent,
     EditarLibroComponent,
+    AddLibroComponent,
   ],
   standalone: true,
   providers: [AutorService, LibroService],
 })
 export class ListarAutoresComponent implements OnInit {
-
   autores: Autor[] = [];
 
   librosByAutor!: Observable<Libro[]>;
@@ -37,6 +38,9 @@ export class ListarAutoresComponent implements OnInit {
 
   dniAGuardar: number = 0;
 
+  addLibro: boolean = false;
+  dniAEnviar: number = 0;
+
   //constructor(private autorService: AutorService) {}
 
   ngOnInit() {
@@ -44,14 +48,9 @@ export class ListarAutoresComponent implements OnInit {
   }
 
   loadAutores() {
-    this.autorService.getAutores().subscribe(
-      (data) => {
-        this.autores = data;
-      },
-      (error) => {
-        console.error('Error al cargar autores', error);
-      }
-    );
+    this.autorService.getAutores().subscribe((data) => {
+      this.autores = data;
+    });
   }
 
   editingAutor: Autor | null = null;
@@ -146,7 +145,7 @@ export class ListarAutoresComponent implements OnInit {
     });
   }
 
-  guardarDni():number {
+  guardarDni(): number {
     this.dniAGuardar = this.editingLibro!.autor!.dni!;
     return this.dniAGuardar;
   }
@@ -163,5 +162,19 @@ export class ListarAutoresComponent implements OnInit {
 
   cancelEditLibro() {
     this.editingLibro = null;
+  }
+
+  agregarLibro(dni: number) {
+    this.dniAEnviar = dni;
+    this.addLibro = true;
+  }
+
+  onLibroAdded() {
+    this.addLibro = false;
+    this.listarLibrosPorAutor(this.dniAEnviar);
+  }
+
+  onCancelAddLibro() {
+    this.addLibro = false;
   }
 }

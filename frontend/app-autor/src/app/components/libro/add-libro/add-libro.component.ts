@@ -1,6 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LibroService } from '../../../services/libro.service';
 import { Libro } from '../../../models/Libro';
@@ -19,6 +29,10 @@ export class AddLibroComponent implements OnInit {
   @Output() libroAdded = new EventEmitter<Libro>();
   @Output() cancelarAdd = new EventEmitter<void>();
 
+  @Input() recibirDni: number = 0;
+
+  @ViewChild('dniInput', { static: true }) dniInput!: ElementRef;
+
   dniAutor: number = 0;
 
   libro: Libro = {
@@ -30,17 +44,27 @@ export class AddLibroComponent implements OnInit {
   private autorService = inject(AutorService);
   private libroService = inject(LibroService);
 
-  //constructor(private libroService: LibroService, private autorService: AutorService) {}
+  private cdr = inject(ChangeDetectorRef);
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.recibirDni) {
+      this.dniAutor = this.recibirDni;
+      setTimeout(() => {
+        this.dniInput.nativeElement.value = this.dniAutor;
+        this.dniInput.nativeElement.dispatchEvent(new Event('input'));
+      }, 0);
+    }
+  }
 
   onCancel() {
     this.cancelarAdd.emit();
   }
 
   onSubmit() {
+    console.log('DNI enviado para validación:', this.dniAutor);
     this.autorService.validarDni(this.dniAutor).subscribe(
       (autorExiste) => {
+        console.log('Respuesta del backend:', autorExiste);
         if (autorExiste) {
           this.libroService.addLibro(this.libro, this.dniAutor).subscribe(
             (libro) => {

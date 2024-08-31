@@ -5,23 +5,26 @@
 			<div class="mt-2 px-7 py-3">
 				<form (ngSubmit)="onSubmit()" #autorForm="ngForm">
 					<div class="mb-4">
-						<label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">DNI del Autor</label>
-						<input type="text" id="nombre" name="nombre" [(ngModel)]="dniAutor" required
+						<label for="dni" class="block text-gray-700 text-sm font-bold mb-2">DNI del Autor</label>
+						<!-- <input type="dni" id="dni" name="dni" [(ngModel)]="dniAutor" required
+							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> -->
+						<input #dniInput type="dni" id="dni" name="dni" [(ngModel)]="dniAutor" required
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
 					</div>
-          <div class="mb-4">
+					<div class="mb-4">
 						<label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre del libro</label>
 						<input type="text" id="nombre" name="nombre" [(ngModel)]="libro.nombre" required
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 					</div>
 					<div class="mb-4">
-						<label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Editorial</label>
-						<input type="text" id="apellido" name="apellido" [(ngModel)]="libro.editorial" required
+						<label for="editorial" class="block text-gray-700 text-sm font-bold mb-2">Editorial</label>
+						<input type="text" id="editorial" name="editorial" [(ngModel)]="libro.editorial" required
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 					</div>
 					<div class="mb-4">
-						<label for="dni" class="block text-gray-700 text-sm font-bold mb-2">Género</label>
-						<input type="text" id="dni" name="dni" [(ngModel)]="libro.genero" required
+						<label for="genero" class="block text-gray-700 text-sm font-bold mb-2">Género</label>
+						<input type="text" id="genero" name="genero" [(ngModel)]="libro.genero" required
 							class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 					</div>
 					<div class="flex items-center justify-between">
