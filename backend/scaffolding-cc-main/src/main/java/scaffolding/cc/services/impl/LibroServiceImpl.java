@@ -13,6 +13,7 @@ import scaffolding.cc.services.LibroService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class LibroServiceImpl implements LibroService {
@@ -77,5 +78,16 @@ public class LibroServiceImpl implements LibroService {
         libroEntity.setEditorial(libro.getEditorial());
         libroEntity.setGenero(libro.getGenero());
         return libroRepository.save(libroEntity);
+    }
+
+    @Override
+    public List<Libro> getLibrosByAutor(Integer dni) {
+        List<Libro> libros = new ArrayList<>();
+        for (Libro l : getLibros()) {
+            if (Objects.equals(l.getAutor().getDni(), dni)) {
+                libros.add(l);
+            }
+        }
+        return libros;
     }
 }

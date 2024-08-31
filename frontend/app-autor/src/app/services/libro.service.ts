@@ -30,4 +30,8 @@ export class LibroService {
     return this.http.post<Libro>(this.api+'/saveLibro/'+dni, libro);
   }
 
+  getLibroByAutor(dni:number): Observable<Libro[]> {
+    return this.http.get<Libro[]>(this.api+'/getLibrosByAutor/'+dni);
+  }
+
 }

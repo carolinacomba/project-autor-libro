@@ -18,4 +18,6 @@ public interface LibroService {
     Boolean deleteLibro(Long id);
 
     LibroEntity updateLibro(Long id, LibroDTO libro);
+
+    List<Libro> getLibrosByAutor(Integer dni);
 }

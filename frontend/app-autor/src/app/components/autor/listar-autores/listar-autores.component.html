@@ -17,10 +17,46 @@
 					<td class="px-4 py-3">{{ autor.apellido }}</td>
 					<td class="px-4 py-3">{{ autor.dni }}</td>
 					<td class="px-4 py-3 flex space-x-2">
-						<button (click)="editAutor(autor)" class="text-blue-500 hover:text-blue-700">
+						<button (click)="editAutor(autor)" class="text-blue-500 hover:text-blue-700" title="Editar">
 							<i class="bi bi-pencil"></i>
 						</button>
-						<button (click)="deleteAutor(autor)" class="text-red-500 hover:text-red-700">
+						<button (click)="deleteAutor(autor)" class="text-red-500 hover:text-red-700" title="Eliminar">
+							<i class="bi bi-trash"></i>
+						</button>
+						<button (click)="listarLibrosPorAutor(autor.dni)" class="text-yellow-500 hover:text-yellow-700"
+							title="Ver libros">
+							<i class="bi bi-book"></i>
+						</button>
+					</td>
+				</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	@if(listarAutores){
+	<div class="w-full max-w-5xl bg-white rounded-lg shadow-lg overflow-x-auto my-10">
+		<table class="w-full">
+			<thead class="bg-blue-500 text-white">
+				<tr>
+					<th class="px-4 py-2 text-left font-medium">Nombre</th>
+					<th class="px-4 py-2 text-left font-medium">Editorial</th>
+					<th class="px-4 py-2 text-left font-medium">Género</th>
+					<th class="px-4 py-2 text-left font-medium">Autor</th>
+					<th class="px-4 py-2 text-left font-medium">Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for(libro of librosByAutor | async; track libro){
+				<tr class="hover:bg-gray-100">
+					<td class="px-4 py-3">{{ libro.nombre }}</td>
+					<td class="px-4 py-3">{{ libro.editorial }}</td>
+					<td class="px-4 py-3">{{ libro.genero }}</td>
+					<td class="px-4 py-3">{{ libro.autor?.nombre }} {{ libro.autor?.apellido }}</td>
+					<td class="px-4 py-3 flex space-x-2">
+						<button (click)="editLibro(libro)" (click)="guardarDni()" title="Editar" class="text-blue-500 hover:text-blue-700">
+							<i class="bi bi-pencil"></i>
+						</button>
+						<button (click)="deleteLibro(libro!)" title="Eliminar" class="text-red-500 hover:text-red-700">
 							<i class="bi bi-trash"></i>
 						</button>
 					</td>
@@ -29,8 +65,16 @@
 			</tbody>
 		</table>
 	</div>
+	}
+
 </div>
 
 @if (editingAutor){
-	<app-editar-autor [autor]="editingAutor" (autorUpdated)="onAutorUpdated($event)" (cancelEdit)="cancelEdit()"></app-editar-autor>
+<app-editar-autor [autor]="editingAutor" (autorUpdated)="onAutorUpdated($event)"
+	(cancelEdit)="cancelEdit()"></app-editar-autor>
+}
+
+@if(editingLibro){
+<app-editar-libro [libro]="editingLibro" (cancelEdit)="cancelEditLibro()"
+	(libroUpdated)="onLibroUpdated($event)"></app-editar-libro>
 }

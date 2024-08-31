@@ -60,4 +60,10 @@ public class LibroController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getLibrosByAutor/{dni}")
+    public ResponseEntity<List<Libro>> getLibrosByAutor(@PathVariable Integer dni) {
+        List<Libro> libros = libroService.getLibrosByAutor(dni);
+        return new ResponseEntity<>(libros, HttpStatus.OK);
+    }
 }
